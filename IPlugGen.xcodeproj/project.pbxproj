@@ -256,6 +256,14 @@
 		4FC0457118BFF161003F67E8 /* genlib_exportfunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC0456218BFF161003F67E8 /* genlib_exportfunctions.h */; };
 		4FC0457218BFF161003F67E8 /* genlib_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC0456318BFF161003F67E8 /* genlib_ops.h */; };
 		4FC0457318BFF161003F67E8 /* genlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0455E18BFF161003F67E8 /* genlib.cpp */; };
+		4FC045AF18BFF436003F67E8 /* gen_exported.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FC045AD18BFF436003F67E8 /* gen_exported.cpp */; };
+		4FC045B018BFF436003F67E8 /* gen_exported.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FC045AD18BFF436003F67E8 /* gen_exported.cpp */; };
+		4FC045B118BFF436003F67E8 /* gen_exported.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC045AE18BFF436003F67E8 /* gen_exported.h */; };
+		4FC045B218BFF436003F67E8 /* gen_exported.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FC045AD18BFF436003F67E8 /* gen_exported.cpp */; };
+		4FC045B318BFF436003F67E8 /* gen_exported.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FC045AD18BFF436003F67E8 /* gen_exported.cpp */; };
+		4FC045B418BFF436003F67E8 /* gen_exported.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FC045AD18BFF436003F67E8 /* gen_exported.cpp */; };
+		4FC045B518BFF436003F67E8 /* gen_exported.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC045AE18BFF436003F67E8 /* gen_exported.h */; };
+		4FC045B618BFF436003F67E8 /* gen_exported.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FC045AD18BFF436003F67E8 /* gen_exported.cpp */; };
 		4FD16CA213B6327D001D0217 /* app_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FD16CA013B6327C001D0217 /* app_main.cpp */; };
 		4FD16CA313B6327D001D0217 /* app_dialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FD16CA113B6327C001D0217 /* app_dialog.cpp */; };
 		4FD16CFC13B63468001D0217 /* swell-appstub.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FD16CFB13B63468001D0217 /* swell-appstub.mm */; };
@@ -622,6 +630,8 @@
 		4FC0456118BFF161003F67E8 /* genlib_common_win.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = genlib_common_win.h; sourceTree = "<group>"; };
 		4FC0456218BFF161003F67E8 /* genlib_exportfunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = genlib_exportfunctions.h; sourceTree = "<group>"; };
 		4FC0456318BFF161003F67E8 /* genlib_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = genlib_ops.h; sourceTree = "<group>"; };
+		4FC045AD18BFF436003F67E8 /* gen_exported.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gen_exported.cpp; sourceTree = "<group>"; };
+		4FC045AE18BFF436003F67E8 /* gen_exported.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gen_exported.h; sourceTree = "<group>"; };
 		4FCF15AF133124D1009A6277 /* IPlugGen.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = IPlugGen.xcconfig; sourceTree = "<group>"; };
 		4FD16A0913B63081001D0217 /* IPlugGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPlugGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD16C9E13B6327C001D0217 /* app_resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_resource.h; path = app_wrapper/app_resource.h; sourceTree = "<group>"; };
@@ -749,6 +759,8 @@
 				52FBBED30D0CF143001C8B8A /* resource.h */,
 				52FBBED20D0CF13D001C8B8A /* IPlugGen.h */,
 				52FBBED00D0CF139001C8B8A /* IPlugGen.cpp */,
+				4FC045AD18BFF436003F67E8 /* gen_exported.cpp */,
+				4FC045AE18BFF436003F67E8 /* gen_exported.h */,
 				4FC0455D18BFF161003F67E8 /* gen_dsp */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				32C88E010371C26100C91783 /* Other Sources */,
@@ -1393,6 +1405,7 @@
 				4FC0456818BFF161003F67E8 /* genlib_common_win.h in Headers */,
 				4FC0456918BFF161003F67E8 /* genlib_exportfunctions.h in Headers */,
 				4FC0456A18BFF161003F67E8 /* genlib_ops.h in Headers */,
+				4FC045B118BFF436003F67E8 /* gen_exported.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1444,6 +1457,7 @@
 				4FC0457018BFF161003F67E8 /* genlib_common_win.h in Headers */,
 				4FC0457118BFF161003F67E8 /* genlib_exportfunctions.h in Headers */,
 				4FC0457218BFF161003F67E8 /* genlib_ops.h in Headers */,
+				4FC045B518BFF436003F67E8 /* gen_exported.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1779,6 +1793,7 @@
 				4F78D9F313B63C6A0032E0F3 /* IPlugVST.cpp in Sources */,
 				4FDA440C13F3E4F2000B4551 /* IBitmapMonoText.cpp in Sources */,
 				4FC0456C18BFF161003F67E8 /* genlib.cpp in Sources */,
+				4FC045B318BFF436003F67E8 /* gen_exported.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1804,6 +1819,7 @@
 				4FDA440813F3E4F2000B4551 /* IBitmapMonoText.cpp in Sources */,
 				4F296BDA1678E6C800C0F5C2 /* dfx-au-utilities.c in Sources */,
 				4FC0456518BFF161003F67E8 /* genlib.cpp in Sources */,
+				4FC045B018BFF436003F67E8 /* gen_exported.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1835,6 +1851,7 @@
 				4FDA440713F3E4F2000B4551 /* IBitmapMonoText.cpp in Sources */,
 				4F79A34E146304CD00744AED /* IPlugProcessAS.cpp in Sources */,
 				4FC0456418BFF161003F67E8 /* genlib.cpp in Sources */,
+				4FC045AF18BFF436003F67E8 /* gen_exported.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1875,6 +1892,7 @@
 				4F9828D5140A9EB700F3FCC1 /* funknown.cpp in Sources */,
 				4F9828D6140A9EB700F3FCC1 /* ustring.cpp in Sources */,
 				4FC0456B18BFF161003F67E8 /* genlib.cpp in Sources */,
+				4FC045B218BFF436003F67E8 /* gen_exported.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1901,6 +1919,7 @@
 				4FB600281567CB0A0020189A /* IPlugAAX_Describe.cpp in Sources */,
 				4FB600291567CB0A0020189A /* AAX_CIPlugParameters.cpp in Sources */,
 				4FC0457318BFF161003F67E8 /* genlib.cpp in Sources */,
+				4FC045B618BFF436003F67E8 /* gen_exported.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1939,6 +1958,7 @@
 				4FB3624F13B648FE00DB6B76 /* main.mm in Sources */,
 				4FDA440E13F3E4F2000B4551 /* IBitmapMonoText.cpp in Sources */,
 				4FC0456D18BFF161003F67E8 /* genlib.cpp in Sources */,
+				4FC045B418BFF436003F67E8 /* gen_exported.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

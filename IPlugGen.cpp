@@ -13,7 +13,7 @@ IPlugGen::IPlugGen(IPlugInstanceInfo instanceInfo)
   gen = (CommonState *)create(44100., DEFAULT_BLOCK_SIZE);
   
   for (int i = 0; i< num_params(); i++) {
-    ParamInfo* p = gen.params[i];
+    ParamInfo* p = gen->params+i;
     GetParam(i)->InitDouble(p->name, p->defaultvalue, p->outputmin, p->outputmax, 0.00001 /*step*/, p->units);
   }
 
@@ -45,5 +45,5 @@ void IPlugGen::OnParamChange(int paramIdx)
 {
   IMutexLock lock(this);
 
- 	setparameter(gen, paramIdx, GetParam(paramIdx)->GetNormalized(), 0);
+ 	setparameter(gen, paramIdx, GetParam(paramIdx)->Value(), 0);
 }
