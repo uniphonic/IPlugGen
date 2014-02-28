@@ -6,7 +6,7 @@
 const int kNumPrograms = 1;
 
 IPlugGen::IPlugGen(IPlugInstanceInfo instanceInfo)
-  :	IPLUG_CTOR(num_params(), kNumPrograms, instanceInfo)
+  : IPLUG_CTOR(num_params(), kNumPrograms, instanceInfo)
 {
   TRACE;
 
@@ -37,13 +37,13 @@ void IPlugGen::Reset()
   TRACE;
   IMutexLock lock(this);
   
-	gen->sr = GetSampleRate();
-	reset(gen);
+  gen->sr = GetSampleRate();
+  reset(gen);
 }
 
 void IPlugGen::OnParamChange(int paramIdx)
 {
   IMutexLock lock(this);
 
- 	setparameter(gen, paramIdx, GetParam(paramIdx)->Value(), 0);
+  setparameter(gen, paramIdx, GetParam(paramIdx)->Value(), 0);
 }

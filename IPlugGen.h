@@ -17,7 +17,7 @@ public:
   void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);
 
 private:
-	CommonState *gen;
+  CommonState *gen;
 };
 
 #endif
