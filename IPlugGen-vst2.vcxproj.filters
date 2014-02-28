@@ -5,12 +5,32 @@
     <ClCompile Include="..\..\WDL\IPlug\IPlugVST.cpp">
       <Filter>vst2</Filter>
     </ClCompile>
+    <ClCompile Include="gen_exported.cpp" />
+    <ClCompile Include="gen_dsp\genlib.cpp">
+      <Filter>gen_dsp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IPlugGen.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="..\..\WDL\IPlug\IPlugVST.h">
       <Filter>vst2</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_exported.h" />
+    <ClInclude Include="gen_dsp\genlib_ops.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common_win.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_exportfunctions.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib.h">
+      <Filter>gen_dsp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -19,6 +39,9 @@
   <ItemGroup>
     <Filter Include="vst2">
       <UniqueIdentifier>{ea16de74-9d15-4c60-ba09-d0924088d3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gen_dsp">
+      <UniqueIdentifier>{c7be1cd2-1f7d-4c59-9d12-1dfc1ad38746}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

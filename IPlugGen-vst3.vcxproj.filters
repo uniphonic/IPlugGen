@@ -41,6 +41,10 @@
     <ClCompile Include="..\..\WDL\IPlug\IPlugVST3.cpp">
       <Filter>vst3</Filter>
     </ClCompile>
+    <ClCompile Include="gen_dsp\genlib.cpp">
+      <Filter>gen_dsp</Filter>
+    </ClCompile>
+    <ClCompile Include="gen_exported.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IPlugGen.h" />
@@ -141,6 +145,22 @@
     <ClInclude Include="..\..\WDL\IPlug\IPlugVST3.h">
       <Filter>vst3</Filter>
     </ClInclude>
+    <ClInclude Include="gen_dsp\genlib.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common_win.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_exportfunctions.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_ops.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_exported.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="vst3">
@@ -172,6 +192,9 @@
     </Filter>
     <Filter Include="vst3\VST3SDK\public.sdk\main">
       <UniqueIdentifier>{ec7b025c-4ef1-4403-956b-b3673b4715b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gen_dsp">
+      <UniqueIdentifier>{39ae8f48-371a-4875-8964-e9b0d245e8c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

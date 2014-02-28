@@ -13,6 +13,9 @@
     <Filter Include="IPlug\RTAS\include">
       <UniqueIdentifier>{13073ee3-c4e8-497c-b935-b091b14197c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gen_dsp">
+      <UniqueIdentifier>{25f96f62-e7b4-4cfe-8bef-4b8f8523e808}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\PT9_SDK\WinBag\Release\lib\DAE.lib">
@@ -118,6 +121,22 @@
     <ClInclude Include="..\..\WDL\IPlug\RTAS\IPlugProcessAS.h">
       <Filter>IPlug\RTAS</Filter>
     </ClInclude>
+    <ClInclude Include="gen_dsp\genlib.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common_win.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_exportfunctions.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_ops.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_exported.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\WDL\IPlug\Hosts.cpp">
@@ -178,6 +197,10 @@
     <ClCompile Include="..\..\WDL\IPlug\RTAS\IPlugProcessAS.cpp">
       <Filter>IPlug\RTAS</Filter>
     </ClCompile>
+    <ClCompile Include="gen_dsp\genlib.cpp">
+      <Filter>gen_dsp</Filter>
+    </ClCompile>
+    <ClCompile Include="gen_exported.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="IPlugGen-rtas.def" />

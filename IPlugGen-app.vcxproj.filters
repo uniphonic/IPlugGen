@@ -10,6 +10,9 @@
     <Filter Include="app\ASIO_SDK">
       <UniqueIdentifier>{b91b9db4-5584-4959-a395-7394ba3cf5a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gen_dsp">
+      <UniqueIdentifier>{72a4ff94-8447-4e8d-818c-7d05e09967e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\WDL\rtaudiomidi\RtAudio.h">
@@ -48,6 +51,22 @@
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="app_wrapper\app_resource.h" />
+    <ClInclude Include="gen_dsp\genlib.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_common_win.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_exportfunctions.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_dsp\genlib_ops.h">
+      <Filter>gen_dsp</Filter>
+    </ClInclude>
+    <ClInclude Include="gen_exported.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\WDL\rtaudiomidi\RtAudio.cpp">
@@ -75,6 +94,10 @@
     <ClCompile Include="..\..\WDL\IPlug\IPlugStandalone.cpp">
       <Filter>app</Filter>
     </ClCompile>
+    <ClCompile Include="gen_dsp\genlib.cpp">
+      <Filter>gen_dsp</Filter>
+    </ClCompile>
+    <ClCompile Include="gen_exported.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="IPlugGen.rc" />

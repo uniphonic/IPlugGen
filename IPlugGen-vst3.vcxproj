@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="PaceFixLogs" AssemblyFile="$(PACE_FUSION_HOME)PaceFusionUi2010.dll" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -316,6 +317,12 @@ if exist "%programfiles(x86)%" (copy /y "$(TargetPath)" "$(VST3_64_PATH)\IPlugGe
     <ClInclude Include="..\..\VST3_SDK\public.sdk\source\vst\vstparameters.h" />
     <ClInclude Include="..\..\VST3_SDK\public.sdk\source\vst\vstsinglecomponenteffect.h" />
     <ClInclude Include="..\..\WDL\IPlug\IPlugVST3.h" />
+    <ClInclude Include="gen_dsp\genlib.h" />
+    <ClInclude Include="gen_dsp\genlib_common.h" />
+    <ClInclude Include="gen_dsp\genlib_common_win.h" />
+    <ClInclude Include="gen_dsp\genlib_exportfunctions.h" />
+    <ClInclude Include="gen_dsp\genlib_ops.h" />
+    <ClInclude Include="gen_exported.h" />
     <ClInclude Include="IPlugGen.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -333,6 +340,8 @@ if exist "%programfiles(x86)%" (copy /y "$(TargetPath)" "$(VST3_64_PATH)\IPlugGe
     <ClCompile Include="..\..\VST3_SDK\public.sdk\source\vst\vstparameters.cpp" />
     <ClCompile Include="..\..\VST3_SDK\public.sdk\source\vst\vstsinglecomponenteffect.cpp" />
     <ClCompile Include="..\..\WDL\IPlug\IPlugVST3.cpp" />
+    <ClCompile Include="gen_dsp\genlib.cpp" />
+    <ClCompile Include="gen_exported.cpp" />
     <ClCompile Include="IPlugGen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -341,4 +350,7 @@ if exist "%programfiles(x86)%" (copy /y "$(TargetPath)" "$(VST3_64_PATH)\IPlugGe
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <Target Name="AfterBuild">
+    <PaceFixLogs Condition="Exists('$(PACE_FUSION_HOME)PaceFusionUi2010.dll')" LogDirectory="$(IntDir)" />
+  </Target>
 </Project>

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="PaceFixLogs" AssemblyFile="$(PACE_FUSION_HOME)PaceFusionUi2010.dll" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -229,11 +230,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\WDL\IPlug\IPlugVST.h" />
+    <ClInclude Include="gen_dsp\genlib.h" />
+    <ClInclude Include="gen_dsp\genlib_common.h" />
+    <ClInclude Include="gen_dsp\genlib_common_win.h" />
+    <ClInclude Include="gen_dsp\genlib_exportfunctions.h" />
+    <ClInclude Include="gen_dsp\genlib_ops.h" />
+    <ClInclude Include="gen_exported.h" />
     <ClInclude Include="IPlugGen.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\WDL\IPlug\IPlugVST.cpp" />
+    <ClCompile Include="gen_dsp\genlib.cpp" />
+    <ClCompile Include="gen_exported.cpp" />
     <ClCompile Include="IPlugGen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -242,4 +251,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <Target Name="AfterBuild">
+    <PaceFixLogs Condition="Exists('$(PACE_FUSION_HOME)PaceFusionUi2010.dll')" LogDirectory="$(IntDir)" />
+  </Target>
 </Project>
