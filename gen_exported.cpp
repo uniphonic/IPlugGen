@@ -32,11 +32,14 @@ static const int GENLIB_LOOPCOUNT_BAIL = 100000;
 typedef struct State { 
 	CommonState __commonstate;
 	Delay m_delay_5;
-	Delay m_delay_1;
+	SineCycle m_cycle_7;
+	SineCycle m_cycle_6;
+	SineData __sinedata;
+	double m_fb_4;
+	double m_depth_3;
+	double m_centre_1;
 	double samplerate;
-	double m_feedback_3;
-	double m_period_2;
-	double m_wetdry_4;
+	double m_rate_2;
 	int vectorsize;
 	int __exception;
 	// re-initialize all member variables;
@@ -44,11 +47,13 @@ typedef struct State {
 		__exception = 0;
 		vectorsize = __vs;
 		samplerate = __sr;
-		m_delay_1.reset("m_delay_1", 44100);
-		m_period_2 = 0;
-		m_feedback_3 = 0.25;
-		m_wetdry_4 = 0.5;
-		m_delay_5.reset("m_delay_5", 44100);
+		m_centre_1 = 500;
+		m_rate_2 = 0.1;
+		m_depth_3 = 150;
+		m_fb_4 = 0.8;
+		m_delay_5.reset("m_delay_5", 4410);
+		m_cycle_6.reset(samplerate, 0);
+		m_cycle_7.reset(samplerate, 0);
 		genlib_reset_complete(this);
 		
 	};
@@ -56,32 +61,36 @@ typedef struct State {
 	inline int perform(t_sample ** __ins, t_sample ** __outs, int __n) { 
 		vectorsize = __n;
 		const t_sample * __in1 = __ins[0];
-		const t_sample * __in2 = __ins[1];
 		t_sample * __out1 = __outs[0];
 		t_sample * __out2 = __outs[1];
 		if (__exception) { 
 			return __exception;
 			
-		} else if (( (__in1 == 0) || (__in2 == 0) || (__out1 == 0) || (__out2 == 0) )) { 
+		} else if (( (__in1 == 0) || (__out1 == 0) || (__out2 == 0) )) { 
 			__exception = GENLIB_ERR_NULL_BUFFER;
 			return __exception;
 			
 		};
+		double mul_1261 = (m_rate_2 * 1.31);
 		// the main sample loop;
 		while ((__n--)) { 
 			const double in1 = (*(__in1++));
-			const double in2 = (*(__in2++));
-			double tap_2064 = m_delay_5.read_linear(m_period_2);
-			double mix_2075 = (in1 + (m_wetdry_4 * (tap_2064 - in1)));
-			double out1 = mix_2075;
-			double tap_2062 = m_delay_1.read_linear(m_period_2);
-			double mix_2076 = (in2 + (m_wetdry_4 * (tap_2062 - in2)));
-			double out2 = mix_2076;
-			double mul_2057 = (tap_2064 * m_feedback_3);
-			double mul_2058 = (tap_2062 * m_feedback_3);
-			m_delay_5.write((mul_2057 + in1));
-			m_delay_1.write((mul_2058 + in2));
-			m_delay_1.step();
+			m_cycle_6.freq(m_rate_2);
+			double cycle_1269 = m_cycle_6(__sinedata);
+			double cycleindex_1270 = m_cycle_6.phase();
+			double mul_1267 = (cycle_1269 * m_depth_3);
+			double add_1268 = (mul_1267 + m_centre_1);
+			m_cycle_7.freq(mul_1261);
+			double cycle_1265 = m_cycle_7(__sinedata);
+			double cycleindex_1266 = m_cycle_7.phase();
+			double mul_1263 = (cycle_1265 * m_depth_3);
+			double add_1264 = (mul_1263 + m_centre_1);
+			double tap_1272 = m_delay_5.read_linear(add_1268);
+			double tap_1273 = m_delay_5.read_linear(add_1264);
+			double out2 = (tap_1273 + in1);
+			double out1 = (tap_1272 + in1);
+			double mul_1259 = (tap_1272 * m_fb_4);
+			m_delay_5.write((mul_1259 + in1));
 			m_delay_5.step();
 			// assign results to output buffer;
 			(*(__out1++)) = out1;
@@ -91,14 +100,17 @@ typedef struct State {
 		return __exception;
 		
 	};
-	inline void set_period(double _value) {
-		m_period_2 = (_value < 5 ? 5 : (_value > 20 ? 20 : _value));
+	inline void set_centre(double _value) {
+		m_centre_1 = (_value < 10 ? 10 : (_value > 1000 ? 1000 : _value));
 	};
-	inline void set_feedback(double _value) {
-		m_feedback_3 = (_value < 0 ? 0 : (_value > 0.999 ? 0.999 : _value));
+	inline void set_rate(double _value) {
+		m_rate_2 = (_value < 0.01 ? 0.01 : (_value > 5 ? 5 : _value));
 	};
-	inline void set_wetdry(double _value) {
-		m_wetdry_4 = (_value < 0 ? 0 : (_value > 1 ? 1 : _value));
+	inline void set_depth(double _value) {
+		m_depth_3 = (_value < 10 ? 10 : (_value > 300 ? 300 : _value));
+	};
+	inline void set_fb(double _value) {
+		m_fb_4 = (_value < -0.999 ? -0.999 : (_value > 0.999 ? 0.999 : _value));
 	};
 	
 } State;
@@ -110,16 +122,16 @@ typedef struct State {
 
 /// Number of signal inputs and outputs 
 
-int gen_kernel_numins = 2;
+int gen_kernel_numins = 1;
 int gen_kernel_numouts = 2;
 
 int num_inputs() { return gen_kernel_numins; }
 int num_outputs() { return gen_kernel_numouts; }
-int num_params() { return 3; }
+int num_params() { return 4; }
 
 /// Assistive lables for the signal inputs and outputs 
 
-const char * gen_kernel_innames[] = { "in1", "in2" };
+const char * gen_kernel_innames[] = { "in1" };
 const char * gen_kernel_outnames[] = { "out1", "out2" };
 
 /// Invoke the signal process of a State object
@@ -141,9 +153,10 @@ void reset(CommonState *cself) {
 void setparameter(CommonState *cself, long index, double value, void *ref) {
 	State * self = (State *)cself;
 	switch (index) {
-		case 0: self->set_period(value); break;
-		case 1: self->set_feedback(value); break;
-		case 2: self->set_wetdry(value); break;
+		case 0: self->set_centre(value); break;
+		case 1: self->set_rate(value); break;
+		case 2: self->set_depth(value); break;
+		case 3: self->set_fb(value); break;
 		
 		default: break;
 	}
@@ -154,9 +167,10 @@ void setparameter(CommonState *cself, long index, double value, void *ref) {
 void getparameter(CommonState *cself, long index, double *value) {
 	State *self = (State *)cself;
 	switch (index) {
-		case 0: *value = self->m_period_2; break;
-		case 1: *value = self->m_feedback_3; break;
-		case 2: *value = self->m_wetdry_4; break;
+		case 0: *value = self->m_centre_1; break;
+		case 1: *value = self->m_rate_2; break;
+		case 2: *value = self->m_depth_3; break;
+		case 3: *value = self->m_fb_4; break;
 		
 		default: break;
 	}
@@ -174,48 +188,62 @@ void * create(double sr, long vs) {
 	self->__commonstate.numouts = gen_kernel_numouts;
 	self->__commonstate.sr = sr;
 	self->__commonstate.vs = vs;
-	self->__commonstate.params = (ParamInfo *)genlib_sysmem_newptr(3 * sizeof(ParamInfo));
-	self->__commonstate.numparams = 3;
-	// initialize parameter 0 ("m_period_2")
+	self->__commonstate.params = (ParamInfo *)genlib_sysmem_newptr(4 * sizeof(ParamInfo));
+	self->__commonstate.numparams = 4;
+	// initialize parameter 0 ("m_centre_1")
 	pi = self->__commonstate.params + 0;
-	pi->name = "period";
+	pi->name = "centre";
 	pi->paramtype = GENLIB_PARAMTYPE_FLOAT;
-	pi->defaultvalue = self->m_period_2;
+	pi->defaultvalue = self->m_centre_1;
 	pi->defaultref = 0;
 	pi->hasinputminmax = false;
 	pi->inputmin = 0; 
 	pi->inputmax = 1;
 	pi->hasminmax = true;
-	pi->outputmin = 5;
-	pi->outputmax = 20;
+	pi->outputmin = 10;
+	pi->outputmax = 1000;
 	pi->exp = 0;
 	pi->units = "";		// no units defined
-	// initialize parameter 1 ("m_feedback_3")
+	// initialize parameter 1 ("m_rate_2")
 	pi = self->__commonstate.params + 1;
-	pi->name = "feedback";
+	pi->name = "rate";
 	pi->paramtype = GENLIB_PARAMTYPE_FLOAT;
-	pi->defaultvalue = self->m_feedback_3;
+	pi->defaultvalue = self->m_rate_2;
 	pi->defaultref = 0;
 	pi->hasinputminmax = false;
 	pi->inputmin = 0; 
 	pi->inputmax = 1;
 	pi->hasminmax = true;
-	pi->outputmin = 0;
-	pi->outputmax = 0.999;
+	pi->outputmin = 0.01;
+	pi->outputmax = 5;
 	pi->exp = 0;
 	pi->units = "";		// no units defined
-	// initialize parameter 2 ("m_wetdry_4")
+	// initialize parameter 2 ("m_depth_3")
 	pi = self->__commonstate.params + 2;
-	pi->name = "wetdry";
+	pi->name = "depth";
 	pi->paramtype = GENLIB_PARAMTYPE_FLOAT;
-	pi->defaultvalue = self->m_wetdry_4;
+	pi->defaultvalue = self->m_depth_3;
 	pi->defaultref = 0;
 	pi->hasinputminmax = false;
 	pi->inputmin = 0; 
 	pi->inputmax = 1;
 	pi->hasminmax = true;
-	pi->outputmin = 0;
-	pi->outputmax = 1;
+	pi->outputmin = 10;
+	pi->outputmax = 300;
+	pi->exp = 0;
+	pi->units = "";		// no units defined
+	// initialize parameter 3 ("m_fb_4")
+	pi = self->__commonstate.params + 3;
+	pi->name = "fb";
+	pi->paramtype = GENLIB_PARAMTYPE_FLOAT;
+	pi->defaultvalue = self->m_fb_4;
+	pi->defaultref = 0;
+	pi->hasinputminmax = false;
+	pi->inputmin = 0; 
+	pi->inputmax = 1;
+	pi->hasminmax = true;
+	pi->outputmin = -0.999;
+	pi->outputmax = 0.999;
 	pi->exp = 0;
 	pi->units = "";		// no units defined
 	
